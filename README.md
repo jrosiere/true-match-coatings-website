@@ -1,29 +1,28 @@
 # True Match Coatings — Website
 
-This repo holds the public website only — no business documents, formulas, or
-trade-secret content. That stays in the separate private `TrueMatchCoatings`
-repo. Keeping this one public and clean is intentional: it's what lets GitHub
-Pages host it for free.
+Public site repo only — no business documents, formulas, or trade-secret
+content. That stays in the separate private `TrueMatchCoatings` repo.
 
-## Deploying
+## Structure
 
-1. Push this repo's contents to a **new public** GitHub repo (e.g.
-   `true-match-coatings-website`).
-2. On GitHub: Settings → Pages → Source → "Deploy from a branch" → `main` /
-   `/ (root)` → Save.
-3. Still on that page, under "Custom domain," enter `truematchcoatings.com`
-   and Save. (The `CNAME` file in this repo already has this domain in it,
-   which GitHub reads automatically — the Settings field just needs to match.)
-4. At Namecheap, in the domain's Advanced DNS panel, add:
-   - Four **A** records, Host `@`, pointing to:
-     `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
-   - One **CNAME** record, Host `www`, pointing to `jrosiere.github.io`
-5. DNS can take up to 24 hours to propagate. Once GitHub shows the domain as
-   verified, check "Enforce HTTPS" in the Pages settings — the SSL
-   certificate can take a bit to provision after that, so don't panic if it's
-   not instant.
+- `index.html` — Home
+- `contact.html` — Contact (address + team directory)
+- `style.css` — shared styles for the whole site
+
+Built as plain HTML/CSS on purpose: no build step, no framework, so adding
+a new page later is just a new `.html` file that links to `style.css` and
+copies the `<header>`/`<footer>` markup from an existing page. Add new nav
+links to the `<nav class="site">` block in each page as new sections
+(Services, Gallery, About, etc.) get built out.
 
 ## Updating content
 
-Edit `index.html` directly, or hand new content/design direction to Claude
-to rebuild it — this is a plain static HTML/CSS file, no build step required.
+Edit directly, or hand new content/direction to Claude to extend — nothing
+here requires a build process, just upload the changed files.
+
+## Known follow-ups
+
+- Chip's last name is still needed — currently listed as "Chip" only on
+  the Contact page.
+- Steve Schmidt's phone/email are live; confirm his listed title ("Sales")
+  is what he wants publicly.

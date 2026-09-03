@@ -5,144 +5,151 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>True Match Coatings</title>
 <meta name="description" content="Custom paint and coatings color matching for Colorado businesses and homeowners.">
+<link rel="stylesheet" href="true-match-coatings-website-v2/style.css">
 <style>
-  :root {
-    --graphite: #1c1e22;
-    --graphite-deep: #121316;
-    --paper: #eceae4;
-    --paper-dim: #9a9a94;
-    --line: #34373d;
+  .hero {
+    padding: clamp(64px, 12vh, 120px) 0 clamp(48px, 8vh, 88px);
   }
 
-  * { box-sizing: border-box; }
-
-  html, body {
-    margin: 0;
-    padding: 0;
-    background: var(--graphite-deep);
-    color: var(--paper);
-    font-family: -apple-system, "Segoe UI", "Inter", Helvetica, Arial, sans-serif;
-    min-height: 100vh;
-  }
-
-  body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 6vh 24px;
-  }
-
-  .swatches {
-    display: flex;
-    gap: 6px;
-    margin-bottom: 48px;
-  }
-
-  .swatch {
-    width: 34px;
-    height: 34px;
-    border-radius: 3px;
-  }
-
-  .swatch:nth-child(1) { background: #b5432c; }
-  .swatch:nth-child(2) { background: #c9862f; }
-  .swatch:nth-child(3) { background: #4f7a5b; }
-  .swatch:nth-child(4) { background: #3c6e8f; }
-  .swatch:nth-child(5) { background: #5b4c8a; }
-  .swatch:nth-child(6) { background: #8a3c5e; }
-
-  main {
-    text-align: center;
-    max-width: 620px;
-  }
-
-  h1 {
-    font-size: clamp(2.2rem, 5vw, 3.2rem);
+  .hero h1 {
+    font-size: clamp(2.4rem, 5.5vw, 3.6rem);
     font-weight: 650;
-    letter-spacing: -0.01em;
-    margin: 0 0 18px;
+    letter-spacing: -0.015em;
     line-height: 1.05;
+    margin: 28px 0 20px;
+    max-width: 14ch;
   }
 
-  p.lede {
-    font-size: 1.15rem;
+  .hero p.lede {
+    font-size: 1.2rem;
     line-height: 1.6;
     color: var(--paper-dim);
-    margin: 0 0 40px;
-    max-width: 48ch;
-    margin-left: auto;
-    margin-right: auto;
+    max-width: 46ch;
+    margin: 0 0 36px;
   }
 
-  .status {
-    display: inline-flex;
+  .cta-row {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  .cta {
+    display: inline-block;
+    padding: 13px 24px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 0.98rem;
+  }
+
+  .cta.primary {
+    background: var(--paper);
+    color: var(--graphite-deep);
+    font-weight: 600;
+  }
+
+  .cta.secondary {
+    border: 1px solid var(--line);
+    color: var(--paper);
+  }
+
+  .cta.primary:hover { background: #fff; }
+  .cta.secondary:hover { border-color: var(--paper-dim); }
+
+  .strip {
+    border-top: 1px solid var(--line);
+    padding: 56px 0;
+  }
+
+  .strip h2 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin: 0 0 28px;
+  }
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 28px;
+  }
+
+  .card h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin: 0 0 8px;
+    display: flex;
     align-items: center;
     gap: 10px;
-    padding: 10px 20px;
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    font-size: 0.95rem;
-    color: var(--paper-dim);
   }
 
-  .status .dot {
+  .card h3 .mark {
     width: 8px;
     height: 8px;
-    border-radius: 50%;
-    background: #c9862f;
+    border-radius: 2px;
+    flex-shrink: 0;
   }
 
-  footer {
-    margin-top: 64px;
-    font-size: 0.9rem;
+  .card p {
     color: var(--paper-dim);
-  }
-
-  footer a {
-    color: var(--paper);
-    text-decoration: none;
-    border-bottom: 1px solid var(--line);
-  }
-
-  footer a:hover {
-    border-bottom-color: var(--paper);
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    .swatches { animation: rise 0.6s ease-out; }
-    @keyframes rise {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    font-size: 0.96rem;
+    line-height: 1.55;
+    margin: 0;
   }
 </style>
 </head>
 <body>
-  <div class="swatches" aria-hidden="true">
-    <div class="swatch"></div>
-    <div class="swatch"></div>
-    <div class="swatch"></div>
-    <div class="swatch"></div>
-    <div class="swatch"></div>
-    <div class="swatch"></div>
-  </div>
 
-  <main>
-    <h1>True Match Coatings</h1>
+<header class="site">
+  <a class="wordmark" href="index.html">
+    <span class="chip" aria-hidden="true"></span>
+    True Match Coatings
+  </a>
+  <nav class="site">
+    <a href="index.html" aria-current="page">Home</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+
+<main>
+  <div class="wrap hero rise">
+    <div class="swatch-row" aria-hidden="true">
+      <div></div><div></div><div></div><div></div><div></div><div></div>
+    </div>
+    <h1>Color matching that goes beyond the computer.</h1>
     <p class="lede">
       Custom color matching for paint, powder coat, and finish work &mdash;
       beyond what a color computer can do on its own. Serving Colorado
       businesses and homeowners.
     </p>
-    <div class="status">
-      <span class="dot" aria-hidden="true"></span>
-      Site under construction &mdash; check back soon
+    <div class="cta-row">
+      <a class="cta primary" href="contact.html">Get in touch</a>
+      <a class="cta secondary" href="mailto:info@truematchcoatings.com">info@truematchcoatings.com</a>
     </div>
-  </main>
+  </div>
 
-  <footer>
-    <a href="mailto:info@truematchcoatings.com">info@truematchcoatings.com</a>
-  </footer>
+  <div class="wrap strip">
+    <h2>What we're building</h2>
+    <div class="cards">
+      <div class="card">
+        <h3><span class="mark" style="background:var(--swatch-1)"></span>Custom color matching</h3>
+        <p>Hand and eye adjustment on top of computer-matched starting formulas, for matches a scan alone can't finish.</p>
+      </div>
+      <div class="card">
+        <h3><span class="mark" style="background:var(--swatch-4)"></span>Trade &amp; commercial supply</h3>
+        <p>Paint and coatings supplies for repair and finish work, with high-accuracy matching for commercial accounts.</p>
+      </div>
+      <div class="card">
+        <h3><span class="mark" style="background:var(--swatch-3)"></span>Retail &amp; walk-in</h3>
+        <p>Open to the public for custom matches on metal, wood, vinyl, tile, and coated surfaces.</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="site">
+  <span>&copy; 2026 True Match Coatings LLC</span>
+  <a href="contact.html">6020 W. 55th Pl, Arvada, CO 80002</a>
+</footer>
+
 </body>
 </html>
