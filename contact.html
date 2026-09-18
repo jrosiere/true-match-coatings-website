@@ -121,6 +121,120 @@
     font-weight: 600;
     margin: 0 0 16px;
   }
+
+  /* ---------- Contact form ---------- */
+
+  .form-section {
+    border-top: 1px solid var(--line);
+    padding: 48px 0;
+  }
+
+  .form-section h2 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin: 0 0 6px;
+  }
+
+  .form-section .kicker {
+    color: var(--paper-dim);
+    font-size: 0.92rem;
+    margin: 0 0 28px;
+    max-width: 52ch;
+  }
+
+  .contact-form {
+    max-width: 560px;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+
+  .field {
+    margin-bottom: 18px;
+  }
+
+  .field label {
+    display: block;
+    font-size: 0.86rem;
+    color: var(--paper-dim);
+    margin-bottom: 7px;
+  }
+
+  .field input,
+  .field select,
+  .field textarea {
+    width: 100%;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    color: var(--paper);
+    border-radius: 5px;
+    padding: 11px 13px;
+    font-size: 0.98rem;
+    font-family: inherit;
+    transition: border-color 0.15s ease;
+  }
+
+  .field input:focus,
+  .field select:focus,
+  .field textarea:focus {
+    outline: none;
+    border-color: var(--swatch-4);
+  }
+
+  .field textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+
+  .field select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23a3a29b' stroke-width='1.5' fill='none' fill-rule='evenodd'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 13px center;
+    padding-right: 32px;
+  }
+
+  .hp-field {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    overflow: hidden;
+  }
+
+  .form-submit {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--paper);
+    color: var(--graphite-deep);
+    font-weight: 600;
+    font-size: 0.98rem;
+    border: none;
+    border-radius: 5px;
+    padding: 13px 24px;
+    cursor: pointer;
+    font-family: inherit;
+  }
+
+  .form-submit:hover { background: #fff; }
+  .form-submit:disabled { opacity: 0.6; cursor: default; }
+
+  .form-status {
+    margin-top: 16px;
+    font-size: 0.92rem;
+  }
+
+  .form-status.success { color: var(--swatch-3); }
+  .form-status.error { color: var(--swatch-1); }
+
+  @media (max-width: 560px) {
+    .form-row { grid-template-columns: 1fr; }
+  }
 </style>
 </head>
 <body>
@@ -154,9 +268,59 @@
       </p>
     </div>
     <div>
-      <h2>General inquiries</h2>
-      <p><a href="mailto:info@truematchcoatings.com">info@truematchcoatings.com</a></p>
+      <h2>Response time</h2>
+      <p>We typically reply within 1 business day.</p>
     </div>
+  </div>
+
+  <div class="wrap form-section">
+    <h2>Send a message</h2>
+    <p class="kicker">Fill out the form below and it'll come straight to us &mdash; no need to look up an email address.</p>
+
+    <form class="contact-form" id="contact-form" action="https://formspree.io/f/xgavvpor" method="POST">
+      <div class="form-row">
+        <div class="field">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required autocomplete="name">
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required autocomplete="email">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="field">
+          <label for="phone">Phone <span style="font-weight:400;">(optional)</span></label>
+          <input type="tel" id="phone" name="phone" autocomplete="tel">
+        </div>
+        <div class="field">
+          <label for="reason">What's this about?</label>
+          <select id="reason" name="reason">
+            <option>General question</option>
+            <option>Custom color match</option>
+            <option>Commercial account</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" required></textarea>
+      </div>
+
+      <!-- Honeypot field — hidden from real visitors, filled in by spam bots -->
+      <div class="field hp-field" aria-hidden="true">
+        <label for="_gotcha">Leave this field blank</label>
+        <input type="text" id="_gotcha" name="_gotcha" tabindex="-1" autocomplete="off">
+      </div>
+
+      <input type="hidden" name="_subject" value="New inquiry from truematchcoatings.com">
+
+      <button type="submit" class="form-submit">Send message</button>
+      <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+    </form>
   </div>
 
   <div class="wrap people">
@@ -166,19 +330,11 @@
         <div class="swatch" style="background:var(--swatch-4)"></div>
         <div class="name">Justin Eversman</div>
         <div class="role">Partner</div>
-        <div class="detail">
-          <a href="mailto:justin@truematchcoatings.com">justin@truematchcoatings.com</a><br>
-          <a href="tel:+13038757298">303-875-7298</a>
-        </div>
       </div>
       <div class="person">
         <div class="swatch" style="background:var(--swatch-1)"></div>
         <div class="name">James Rosiere</div>
         <div class="role">Partner</div>
-        <div class="detail">
-          <a href="mailto:james@truematchcoatings.com">james@truematchcoatings.com</a><br>
-          <a href="tel:+13035229096">303-522-9096</a>
-        </div>
       </div>
     </div>
 
@@ -188,18 +344,11 @@
         <div class="swatch" style="background:var(--swatch-3)"></div>
         <div class="name">Chip Wheeler</div>
         <div class="role">Store Manager</div>
-        <div class="detail">
-          <a href="mailto:chip@truematchcoatings.com">chip@truematchcoatings.com</a>
-        </div>
       </div>
       <div class="person">
         <div class="swatch" style="background:var(--swatch-5)"></div>
         <div class="name">Steve Schmidt</div>
         <div class="role">Sales</div>
-        <div class="detail">
-          <a href="mailto:steve@truematchcoatings.com">steve@truematchcoatings.com</a><br>
-          <a href="tel:+17206357597">720-635-7597</a>
-        </div>
       </div>
     </div>
   </div>
@@ -207,8 +356,42 @@
 
 <footer class="site">
   <span>&copy; 2026 True Match Coatings LLC</span>
-  <a href="mailto:info@truematchcoatings.com">info@truematchcoatings.com</a>
+  <a href="#contact-form">Send us a message</a>
 </footer>
+
+<script>
+  const form = document.getElementById('contact-form');
+  const status = document.getElementById('form-status');
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    const submitBtn = form.querySelector('.form-submit');
+    submitBtn.disabled = true;
+    status.className = 'form-status';
+    status.textContent = 'Sending…';
+
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (response.ok) {
+        form.reset();
+        status.className = 'form-status success';
+        status.textContent = "Thanks — we've got your message and will be in touch soon.";
+      } else {
+        throw new Error('Form submission failed');
+      }
+    } catch (err) {
+      status.className = 'form-status error';
+      status.textContent = "Something went wrong sending that. Please try again, or call us directly.";
+    } finally {
+      submitBtn.disabled = false;
+    }
+  });
+</script>
 
 </body>
 </html>
