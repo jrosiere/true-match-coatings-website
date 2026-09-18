@@ -52,11 +52,10 @@ header.site {
   gap: 10px;
 }
 
-.wordmark .chip {
-  width: 12px;
-  height: 12px;
-  border-radius: 3px;
-  background: var(--swatch-2);
+.wordmark .brand-mark {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
   flex-shrink: 0;
 }
 
