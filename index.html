@@ -11,16 +11,26 @@
 <link rel="apple-touch-icon" href="favicon-512.png">
 <style>
   .hero {
-    padding: clamp(64px, 12vh, 120px) 0 clamp(48px, 8vh, 88px);
+    padding: clamp(56px, 10vh, 100px) 0 clamp(48px, 8vh, 88px);
+  }
+
+  .hero .swatch-row {
+    gap: 15px;
+    margin-bottom: 8px;
+  }
+  .hero .swatch-row div {
+    width: 45px;
+    height: 45px;
+    border-radius: 4px;
   }
 
   .hero h1 {
-    font-size: clamp(2.4rem, 5.5vw, 3.6rem);
+    font-size: clamp(2.1rem, 4.8vw, 3.2rem);
     font-weight: 650;
     letter-spacing: -0.015em;
-    line-height: 1.05;
-    margin: 28px 0 20px;
-    max-width: 14ch;
+    line-height: 1.15;
+    margin: 0 0 20px;
+    max-width: 27ch;
   }
 
   .hero p.lede {
@@ -104,9 +114,12 @@
 
 <header class="site">
   <a class="wordmark" href="index.html">
-    <img src="favicon.svg" alt="" class="brand-mark" aria-hidden="true">
+    <div class="brand-blocks" aria-hidden="true">
+      <div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+    </div>
     True Match Coatings
   </a>
+  <a class="header-phone" href="tel:+13033453634">303-345-3634</a>
   <nav class="site">
     <a href="index.html" aria-current="page">Home</a>
     <a href="contact.html">Contact</a>
@@ -116,9 +129,9 @@
 <main>
   <div class="wrap hero rise">
     <div class="swatch-row" aria-hidden="true">
-      <div></div><div></div><div></div><div></div><div></div><div></div>
+      <div></div><div></div><div></div><div></div><div></div><div></div><div></div>
     </div>
-    <h1>Color matching that goes beyond the computer.</h1>
+    <h1>Color matching that goes<br>beyond the computer.</h1>
     <p class="lede">
       Custom color matching for paint, powder coat, and finish work &mdash;
       beyond what a color computer can do on its own. Serving Colorado
