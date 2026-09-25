@@ -67,6 +67,14 @@ header.site {
 .brand-blocks div:nth-child(6) { background: #277DA1; }
 .brand-blocks div:nth-child(7) { background: #6A4C93; }
 
+.header-slogan {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: #17A398;
+  letter-spacing: 0.01em;
+  margin-top: 1px;
+}
+
 .header-phone {
   justify-self: center;
   color: var(--paper);
