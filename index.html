@@ -47,6 +47,17 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="favicon-512.png">
 <style>
+  /* Phone-width header: logo + nav on one row, phone number beneath */
+  @media (max-width: 640px) {
+    header.site { grid-template-columns: 1fr auto; row-gap: 12px; }
+    .wordmark { white-space: nowrap; font-size: 0.95rem; }
+    header.site { column-gap: 12px; }
+    nav.site { gap: 12px; }
+    nav.site a { font-size: 0.9rem; }
+    .header-phone { grid-column: 1 / -1; grid-row: 2; justify-self: start; }
+  }
+</style>
+<style>
   .hero {
     padding: clamp(56px, 10vh, 100px) 0 clamp(48px, 8vh, 88px);
   }
@@ -123,6 +134,42 @@
     gap: 28px;
   }
 
+  a.card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    border-radius: 4px;
+    transition: box-shadow 0.15s ease;
+  }
+
+  a.card:hover {
+    box-shadow: 0 0 0 14px var(--panel), 0 0 0 15px var(--line);
+  }
+
+  .card .more {
+    display: inline-block;
+    margin-top: 12px;
+    font-size: 0.88rem;
+    color: var(--paper);
+  }
+
+  .brand-note {
+    color: var(--paper-dim);
+    font-size: 1.02rem;
+    line-height: 1.6;
+    max-width: 62ch;
+    margin: 0 0 16px;
+  }
+
+  .brand-link {
+    color: var(--paper);
+    font-size: 0.95rem;
+    text-decoration: none;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 2px;
+  }
+  .brand-link:hover { border-bottom-color: var(--paper); }
+
   .card h3 {
     font-size: 1.05rem;
     font-weight: 600;
@@ -183,21 +230,30 @@
   </div>
 
   <div class="wrap strip">
-    <h2>What we're building</h2>
+    <h2>What we do</h2>
     <div class="cards">
-      <div class="card">
+      <a class="card" href="services.html#custom-color-matching">
         <h3><span class="mark" style="background:var(--swatch-1)"></span>Custom color matching</h3>
         <p>Hand and eye adjustment on top of computer-matched starting formulas, for matches a scan alone can't finish.</p>
-      </div>
-      <div class="card">
+        <span class="more">Learn more &rarr;</span>
+      </a>
+      <a class="card" href="services.html#trade-commercial-supply">
         <h3><span class="mark" style="background:var(--swatch-4)"></span>Trade &amp; commercial supply</h3>
         <p>Paint and coatings supplies for repair and finish work, with high-accuracy matching for commercial accounts.</p>
-      </div>
-      <div class="card">
+        <span class="more">Learn more &rarr;</span>
+      </a>
+      <a class="card" href="services.html#retail-walk-in">
         <h3><span class="mark" style="background:var(--swatch-3)"></span>Retail &amp; walk-in</h3>
         <p>Open to the public for custom matches on metal, wood, vinyl, tile, and coated surfaces.</p>
-      </div>
+        <span class="more">Learn more &rarr;</span>
+      </a>
     </div>
+  </div>
+
+  <div class="wrap strip">
+    <h2>Carrying Valspar&reg; Refinish</h2>
+    <p class="brand-note">We carry the Valspar Refinish product line, from primer to clearcoat, including its Low VOC products for Colorado's updated requirements.</p>
+    <a class="brand-link" href="services.html#valspar-refinish">See the product line &rarr;</a>
   </div>
 </main>
 

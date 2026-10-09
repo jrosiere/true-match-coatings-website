@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Paint &amp; Powder Coat Color Matching Services | Denver Metro Area | True Match Coatings</title>
-<meta name="description" content="Custom paint and powder coat color matching, trade and commercial coatings supply, and walk-in matching on metal, wood, vinyl, and tile. Valspar Refinish dealer. Based in Arvada, serving the Denver Metro Area and all of Colorado.">
+<title>Color Matching Services | Denver Metro &amp; Colorado | True Match Coatings</title>
+<meta name="description" content="Custom paint and powder coat color matching, trade and commercial supply, and walk-in matching. Carrying the Valspar Refinish product line. Serving the Denver Metro Area and all of Colorado.">
 <link rel="canonical" href="https://truematchcoatings.com/services.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="True Match Coatings">
-<meta property="og:title" content="Paint &amp; Powder Coat Color Matching Services | Denver Metro Area">
+<meta property="og:title" content="Color Matching Services | Denver Metro &amp; Colorado | True Match Coatings">
 <meta property="og:description" content="Custom color matching, trade and commercial supply, and walk-in matching. Based in Arvada, serving the Denver Metro Area and all of Colorado.">
 <meta property="og:url" content="https://truematchcoatings.com/services.html">
 <meta property="og:image" content="https://truematchcoatings.com/favicon-512.png">
@@ -47,6 +47,17 @@
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="favicon-512.png">
+<style>
+  /* Phone-width header: logo + nav on one row, phone number beneath */
+  @media (max-width: 640px) {
+    header.site { grid-template-columns: 1fr auto; row-gap: 12px; }
+    .wordmark { white-space: nowrap; font-size: 0.95rem; }
+    header.site { column-gap: 12px; }
+    nav.site { gap: 12px; }
+    nav.site a { font-size: 0.9rem; }
+    .header-phone { grid-column: 1 / -1; grid-row: 2; justify-self: start; }
+  }
+</style>
 <style>
   .page-head {
     padding: clamp(48px, 9vh, 88px) 0 44px;
@@ -127,6 +138,7 @@
   }
 
   .cta-row { display: flex; gap: 14px; flex-wrap: wrap; }
+  .page-head .cta-row { margin-top: 28px; }
 
   .cta {
     display: inline-block;
@@ -161,11 +173,14 @@
     <div class="swatch-row" aria-hidden="true">
       <div></div><div></div><div></div><div></div><div></div><div></div><div></div>
     </div>
-    <h1>Color matching services for the Denver Metro Area</h1>
+    <h1>Color matching services for the Denver Metro Area and all of Colorado</h1>
     <p>From a single hard-to-match color to ongoing commercial supply, we match paint, powder coat, and finishes by hand and eye &mdash; beyond what a color computer can do on its own.</p>
+    <div class="cta-row">
+      <a class="cta primary" href="contact.html#contact-form">Start a match</a>
+    </div>
   </div>
 
-  <section class="wrap service">
+  <section class="wrap service" id="custom-color-matching">
     <h2><span class="mark" style="background:var(--swatch-1)"></span>Custom color matching</h2>
     <p>A color scan gets you a starting formula. We take it from there, adjusting by hand and by eye to finish the matches a scan alone can't. That means colors that are faded, rare, or just hard to get right.</p>
     <ul>
@@ -175,7 +190,7 @@
     </ul>
   </section>
 
-  <section class="wrap service">
+  <section class="wrap service" id="trade-commercial-supply">
     <h2><span class="mark" style="background:var(--swatch-4)"></span>Trade &amp; commercial supply</h2>
     <p>Paint and coatings supplies for repair and finish work, with high-accuracy matching for commercial accounts. If you match colors for a living, we're set up to be the supplier you can count on.</p>
     <ul>
@@ -185,7 +200,7 @@
     </ul>
   </section>
 
-  <section class="wrap service">
+  <section class="wrap service" id="retail-walk-in">
     <h2><span class="mark" style="background:var(--swatch-3)"></span>Retail &amp; walk-in</h2>
     <p>We're open to the public. Homeowners and DIYers are welcome to stop by the shop for a custom match on metal, wood, vinyl, tile, and coated surfaces.</p>
     <ul>
@@ -195,7 +210,7 @@
     </ul>
   </section>
 
-  <section class="wrap service">
+  <section class="wrap service" id="valspar-refinish">
     <h2><span class="mark" style="background:var(--swatch-5)"></span>Valspar Refinish product line</h2>
     <p>We carry Valspar&reg; Refinish, a professional refinish line that runs from primer to clearcoat. Pair it with our color matching and you get a finish that matches and holds up.</p>
     <ul>
@@ -210,9 +225,6 @@
   <section class="wrap area">
     <h2>Serving the Denver Metro Area &mdash; and all of Colorado</h2>
     <p>Our shop is in Arvada, a short drive from Denver, Wheat Ridge, Westminster, Golden, Lakewood, and Broomfield. We work with businesses and homeowners across the Denver Metro Area, and we serve customers throughout all of Colorado.</p>
-    <div class="cta-row">
-      <a class="cta primary" href="contact.html#contact-form">Start a match</a>
-    </div>
   </section>
 </main>
 
