@@ -304,32 +304,37 @@
     <h2>Send a message</h2>
     <p class="kicker">Fill out the form below and it'll come straight to us &mdash; no need to look up an email address.</p>
 
-    <form class="contact-form" id="contact-form" action="https://formspree.io/f/xgavvpor" method="POST">
+    <form class="contact-form" id="contact-form" method="POST" novalidate>
       <div class="form-row">
         <div class="field">
-          <label for="name">Name</label>
-          <input type="text" id="name" name="name" required autocomplete="name">
+          <label for="firstname">First name</label>
+          <input type="text" id="firstname" name="firstname" required autocomplete="given-name">
         </div>
         <div class="field">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" required autocomplete="email">
+          <label for="lastname">Last name</label>
+          <input type="text" id="lastname" name="lastname" required autocomplete="family-name">
         </div>
       </div>
 
       <div class="form-row">
         <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required autocomplete="email">
+        </div>
+        <div class="field">
           <label for="phone">Phone <span style="font-weight:400;">(optional)</span></label>
           <input type="tel" id="phone" name="phone" autocomplete="tel">
         </div>
-        <div class="field">
-          <label for="reason">What's this about?</label>
-          <select id="reason" name="reason">
-            <option>General question</option>
-            <option>Custom color match</option>
-            <option>Commercial account</option>
-            <option>Other</option>
-          </select>
-        </div>
+      </div>
+
+      <div class="field">
+        <label for="reason">What's this about?</label>
+        <select id="reason" name="inquiry_reason">
+          <option value="General question">General question</option>
+          <option value="Custom color match">Custom color match</option>
+          <option value="Commercial account">Commercial account</option>
+          <option value="Other">Other</option>
+        </select>
       </div>
 
       <div class="field">
@@ -343,10 +348,9 @@
         <input type="text" id="_gotcha" name="_gotcha" tabindex="-1" autocomplete="off">
       </div>
 
-      <input type="hidden" name="_subject" value="New inquiry from truematchcoatings.com">
-
       <button type="submit" class="form-submit">Send message</button>
       <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+      <noscript><p class="form-status error">This form needs JavaScript. Please call us at 303-345-3634 instead.</p></noscript>
     </form>
   </div>
 
@@ -389,33 +393,73 @@
 </footer>
 
 <script>
+  // HubSpot form settings
+  const HUBSPOT_PORTAL_ID = '247621168';
+  const HUBSPOT_FORM_ID = '1c476b60-14f7-4764-a785-c6fe65222942';
+  const HUBSPOT_ENDPOINT =
+    'https://api.hsforms.com/submissions/v3/integration/submit/' +
+    HUBSPOT_PORTAL_ID + '/' + HUBSPOT_FORM_ID;
+  // Property internal names in HubSpot (Settings > Properties)
+  const REASON_PROPERTY = 'what_s_this_about_';
+
   const form = document.getElementById('contact-form');
   const status = document.getElementById('form-status');
+  const successMsg = "Thanks — we've got your message and will be in touch soon.";
+
+  function getCookie(name) {
+    const match = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
+    return match ? decodeURIComponent(match[1]) : '';
+  }
 
   form.addEventListener('submit', async function (e) {
     e.preventDefault();
+    if (!form.reportValidity()) return;
+
     const submitBtn = form.querySelector('.form-submit');
-    submitBtn.disabled = true;
     status.className = 'form-status';
+
+    // Honeypot: real visitors never fill this in. Pretend success, send nothing.
+    if (form.elements['_gotcha'].value) {
+      form.reset();
+      status.className = 'form-status success';
+      status.textContent = successMsg;
+      return;
+    }
+
+    submitBtn.disabled = true;
     status.textContent = 'Sending…';
 
+    const fields = [
+      { name: 'firstname', value: form.elements['firstname'].value.trim() },
+      { name: 'lastname', value: form.elements['lastname'].value.trim() },
+      { name: 'email', value: form.elements['email'].value.trim() },
+      { name: REASON_PROPERTY, value: form.elements['inquiry_reason'].value },
+      { name: 'message', value: form.elements['message'].value.trim() }
+    ];
+    const phone = form.elements['phone'].value.trim();
+    if (phone) fields.push({ name: 'phone', value: phone });
+
+    const context = { pageUri: window.location.href, pageName: document.title };
+    const hutk = getCookie('hubspotutk');
+    if (hutk) context.hutk = hutk;
+
     try {
-      const response = await fetch(form.action, {
+      const response = await fetch(HUBSPOT_ENDPOINT, {
         method: 'POST',
-        body: new FormData(form),
-        headers: { 'Accept': 'application/json' }
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ fields: fields, context: context })
       });
 
       if (response.ok) {
         form.reset();
         status.className = 'form-status success';
-        status.textContent = "Thanks — we've got your message and will be in touch soon.";
+        status.textContent = successMsg;
       } else {
-        throw new Error('Form submission failed');
+        throw new Error('HubSpot responded with ' + response.status);
       }
     } catch (err) {
       status.className = 'form-status error';
-      status.textContent = "Something went wrong sending that. Please try again, or call us directly.";
+      status.textContent = "Something went wrong sending that. Please try again, or call us at 303-345-3634.";
     } finally {
       submitBtn.disabled = false;
     }
