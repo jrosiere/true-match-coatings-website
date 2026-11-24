@@ -14,7 +14,8 @@ in the private `TrueMatchCoatings` repo.
 
 ## Contact form
 - `contact.html` posts straight to the HubSpot Forms API (v3 integration
-  submit) for the form "Contact form 10-13-26". Field names must match
+  submit) for the form "Contact form 10-13-26" (shown in HubSpot as
+  "Website Form"). `marketing_opt_in` is on that form. Field names must match
   HubSpot contact property internal names.
 - Fields sent: firstname, lastname, email, phone (if given),
   `what_s_this_about_`, message, and `marketing_opt_in` = true only when the

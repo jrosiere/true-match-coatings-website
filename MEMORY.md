@@ -14,10 +14,9 @@ Public file: site decisions only, nothing confidential.
 
 ## Log
 - Nov 24, 2026: opt-in checkbox merged and live (PR #1). HubSpot property
-  `marketing_opt_in` created the same day.
+  `marketing_opt_in` created the same day, and added to the HubSpot form
+  (shown in HubSpot as "Website Form") and published that afternoon.
 
 ## Open
-- Add "Marketing opt-in" to the HubSpot form "Contact form 10-13-26" so
-  HubSpot treats it as a form field.
 - Planned pages: before-and-after gallery, a how-to page or two.
 - Chip's last name still needed on the Contact page.
