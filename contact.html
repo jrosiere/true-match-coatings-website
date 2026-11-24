@@ -439,8 +439,8 @@
     HUBSPOT_PORTAL_ID + '/' + HUBSPOT_FORM_ID;
   // Property internal names in HubSpot (Settings > Properties)
   const REASON_PROPERTY = 'what_s_this_about_';
-  // Single checkbox contact property for the email opt-in. It must exist in
-  // HubSpot and be on the form before this goes live (see the PR notes).
+  // Single checkbox contact property for the email opt-in (created in HubSpot
+  // Nov 24, 2026). It should also be added to the HubSpot form itself.
   const OPT_IN_PROPERTY = 'marketing_opt_in';
 
   const form = document.getElementById('contact-form');
@@ -489,12 +489,27 @@
     const hutk = getCookie('hubspotutk');
     if (hutk) context.hutk = hutk;
 
-    try {
-      const response = await fetch(HUBSPOT_ENDPOINT, {
+    function send(fieldList) {
+      return fetch(HUBSPOT_ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ fields: fields, context: context })
+        body: JSON.stringify({ fields: fieldList, context: context })
       });
+    }
+
+    try {
+      let response = await send(fields);
+
+      // Safety net: if HubSpot turns the submission away while the opt-in is
+      // included (for example because the field isn't on the HubSpot form),
+      // send it again without the opt-in so the customer's message still
+      // gets through. Losing a lead is worse than losing one opt-in.
+      if (!response.ok && response.status === 400 &&
+          fields.some(function (f) { return f.name === OPT_IN_PROPERTY; })) {
+        response = await send(fields.filter(function (f) {
+          return f.name !== OPT_IN_PROPERTY;
+        }));
+      }
 
       if (response.ok) {
         form.reset();
