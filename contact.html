@@ -224,6 +224,35 @@
     overflow: hidden;
   }
 
+  .field-check {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 4px 0 22px;
+  }
+
+  .field-check input {
+    flex: none;
+    width: 18px;
+    height: 18px;
+    margin: 2px 0 0;
+    accent-color: var(--swatch-4);
+    cursor: pointer;
+  }
+
+  .field-check label {
+    font-size: 0.92rem;
+    color: var(--paper);
+    cursor: pointer;
+  }
+
+  .field-check .hint {
+    display: block;
+    color: var(--paper-dim);
+    font-size: 0.84rem;
+    margin-top: 2px;
+  }
+
   .form-submit {
     display: inline-flex;
     align-items: center;
@@ -342,6 +371,14 @@
         <textarea id="message" name="message" required></textarea>
       </div>
 
+      <div class="field-check">
+        <input type="checkbox" id="marketing_opt_in" name="marketing_opt_in" value="true">
+        <label for="marketing_opt_in">
+          Send me product news and specials
+          <span class="hint">Occasional emails from True Match Coatings. Unsubscribe anytime.</span>
+        </label>
+      </div>
+
       <!-- Honeypot field — hidden from real visitors, filled in by spam bots -->
       <div class="field hp-field" aria-hidden="true">
         <label for="_gotcha">Leave this field blank</label>
@@ -402,6 +439,9 @@
     HUBSPOT_PORTAL_ID + '/' + HUBSPOT_FORM_ID;
   // Property internal names in HubSpot (Settings > Properties)
   const REASON_PROPERTY = 'what_s_this_about_';
+  // Single checkbox contact property for the email opt-in. It must exist in
+  // HubSpot and be on the form before this goes live (see the PR notes).
+  const OPT_IN_PROPERTY = 'marketing_opt_in';
 
   const form = document.getElementById('contact-form');
   const status = document.getElementById('form-status');
@@ -439,6 +479,11 @@
     ];
     const phone = form.elements['phone'].value.trim();
     if (phone) fields.push({ name: 'phone', value: phone });
+    // Only send the opt-in when it's ticked, so a returning contact who opted
+    // in before isn't switched back off by leaving the box empty this time.
+    if (form.elements['marketing_opt_in'].checked) {
+      fields.push({ name: OPT_IN_PROPERTY, value: 'true' });
+    }
 
     const context = { pageUri: window.location.href, pageName: document.title };
     const hutk = getCookie('hubspotutk');
